@@ -9,9 +9,9 @@ import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
+import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
 import Typography from "@material-ui/core/Typography";
-import { red } from "@material-ui/core/colors";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
@@ -40,13 +40,15 @@ const useStyles = makeStyles(theme => ({
     color: "#7f8b92"
   },
   avatar: {
-    backgroundColor: red[500]
+    backgroundColor: "#f39c12"
   }
 }));
 
 export default function ServerCard(props) {
   let serverInfo = {
     name: "Server Name",
+    position: 1,
+    votes: 10,
     lastRefresh: "September 14, 2016",
     imgUrl:
       "http://top.tuservermu.com.ve/template/img/uploads/servers/banner_5cd336de7ce8e.gif",
@@ -70,7 +72,7 @@ export default function ServerCard(props) {
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            R
+            {serverInfo.position}
           </Avatar>
         }
         action={
@@ -92,12 +94,16 @@ export default function ServerCard(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+        <IconButton aria-label="add">
+          <AddCircleIcon style={{ color: "#28a745" }} />
+        </IconButton>
+        <IconButton aria-label="remove" color="secondary">
+          <RemoveCircleIcon />
         </IconButton>
         <IconButton aria-label="share">
-          <ShareIcon />
+          <ShareIcon color="primary" />
         </IconButton>
+
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded

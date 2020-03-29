@@ -16,23 +16,32 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ValidationTextFields() {
+function handleErrorLogin() {}
+
+export default function LoginForm(props) {
   const classes = useStyles();
+  let form = props.form
+    ? props.form
+    : {
+        title: "Ingresa tus datos para acceder",
+        onSubmit: handleErrorLogin
+      };
 
   return (
     <div>
       <Typography align="center" className={classes.title} variant="h6">
-        Ingresa tus datos para acceder
+        {form.title}
       </Typography>
-      <form className={classes.root} noValidate autoComplete="off">
+      <form
+        onSubmit={form.onSubmit}
+        className={classes.root}
+        noValidate
+        autoComplete="off"
+      >
         <div>
-          <TextField id="standard-error" label="Usuario" />
-          <TextField
-            id="standard-error-helper-text"
-            label="Contraseña"
-            type="password"
-          />
-          <Button className="button" variant="contained">
+          <TextField id="user" label="Usuario" />
+          <TextField id="pass" label="Contraseña" type="password" />
+          <Button className="button" type="submit" variant="contained">
             Login
           </Button>
         </div>

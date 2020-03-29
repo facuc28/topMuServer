@@ -17,25 +17,43 @@ const useStyles = makeStyles(theme => ({
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3)
+  },
+  button: {
+    backgroundColor: "#FFBF27",
+    border: "1px solid #FFBF27",
+    borderRadius: "2px",
+    fontSize: 10,
+    fontWeight: "bold"
   }
 }));
 
-export default function TransitionsModal() {
+export default function AppButton(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-
   const handleOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
 
+  let button = {
+    title: props.title ? props.title : "Title",
+    onClick: props.onClick ? props.onClick : handleOpen
+  };
+  let form = {
+    title: "Ingresa tus datos para acceder",
+    onSubmit: props.onSubmit
+  };
+
   return (
     <div>
-      <Button onClick={handleOpen} variant="contained">
-        Login
+      <Button
+        onClick={button.onClick}
+        className={classes.button}
+        variant="contained"
+      >
+        {button.title}
       </Button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -51,7 +69,7 @@ export default function TransitionsModal() {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <LoginForm />
+            <LoginForm form={form} />
           </div>
         </Fade>
       </Modal>

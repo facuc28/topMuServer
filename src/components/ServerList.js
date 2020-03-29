@@ -26,7 +26,9 @@ export default function ServerList(props) {
         <Grid item xs={3} />
         <Grid item xs={6}>
           {serversInformation.map(serverInfo => (
-            <ServerCard serverInfo={serverInfo} />
+            <ol key={serverInfo.position}>
+              <ServerCard serverInfo={serverInfo} />
+            </ol>
           ))}
         </Grid>
         <Grid item xs={3} />
@@ -40,6 +42,8 @@ export default function ServerList(props) {
     servers.push({
       name: "THC Mu Online",
       lastRefresh: "September 14, 2016",
+      votes: 10,
+      position: 1,
       imgUrl:
         "http://top.tuservermu.com.ve/template/img/uploads/servers/banner_5cd336de7ce8e.gif",
       description:
@@ -51,6 +55,7 @@ export default function ServerList(props) {
     servers.push({
       name: "THC Mu Online",
       lastRefresh: "September 14, 2016",
+      position: 2,
       imgUrl:
         "http://top.tuservermu.com.ve/template/img/uploads/servers/banner_5cd336de7ce8e.gif",
       description:
@@ -62,6 +67,7 @@ export default function ServerList(props) {
     servers.push({
       name: "THC Mu Online",
       lastRefresh: "September 14, 2016",
+      position: 3,
       imgUrl:
         "http://top.tuservermu.com.ve/template/img/uploads/servers/banner_5cd336de7ce8e.gif",
       description:
