@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import ServerCard from "./ServerCard";
+import TopServers from "./TopServers";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,17 +23,18 @@ export default function ServerList(props) {
 
   function FormRow() {
     return (
-      <React.Fragment>
-        <Grid item xs={3} />
-        <Grid item xs={6}>
+      <Grid container>
+        <Grid item xs={2} md={2} lg={3} />
+        <Grid item xs={8} md={8} lg={6}>
+         <TopServers />
           {serversInformation.map(serverInfo => (
             <ol key={serverInfo.position}>
               <ServerCard serverInfo={serverInfo} />
             </ol>
           ))}
         </Grid>
-        <Grid item xs={3} />
-      </React.Fragment>
+        <Grid item xs={2} md={2} lg={3} />
+      </Grid>
     );
   }
 
@@ -45,7 +47,7 @@ export default function ServerList(props) {
       votes: 10,
       position: 1,
       imgUrl:
-        "http://top.tuservermu.com.ve/template/img/uploads/servers/banner_5cd336de7ce8e.gif",
+        "http://top.tuservermu.com.ve/template/img/uploads/servers/banner_5e66ec16ca2a4.gif",
       description:
         "Server exp: 100 y drop al 80% abrio hace una semana veni a verlo",
       longDescription:

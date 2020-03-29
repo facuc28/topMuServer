@@ -1,21 +1,19 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
 import Typography from "@material-ui/core/Typography";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import ServerInfo from "./ServerInfo";
+import Grid from "@material-ui/core/Grid";
+import Chip from "@material-ui/core/Chip";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,6 +40,9 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     backgroundColor: "#f39c12"
+  },
+  chip: {
+    background: "#607D8B"
   }
 }));
 
@@ -62,14 +63,13 @@ export default function ServerCard(props) {
   }
 
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   function getCardTitle() {
     return <Typography type="h1">{serverInfo.name}</Typography>;
+  }
+
+  function getLabel() {
+    return "Experiencia: x500";
   }
 
   return (
@@ -93,7 +93,26 @@ export default function ServerCard(props) {
         title="Paella dish"
       />
       <CardContent>
-        <ServerInfo />
+        <Grid container spacing={1}>
+          <Grid item>
+            <Chip label={getLabel()} className={classes.chip} />
+          </Grid>
+          <Grid item>
+            <Chip label={getLabel()} className={classes.chip} />
+          </Grid>
+          <Grid item>
+            <Chip label={getLabel()} className={classes.chip} />
+          </Grid>
+          <Grid item>
+            <Chip label={getLabel()} className={classes.chip} />
+          </Grid>
+          <Grid item>
+            <Chip label={getLabel()} className={classes.chip} />
+          </Grid>
+          <Grid item>
+            <Chip label={getLabel()} className={classes.chip} />
+          </Grid>
+        </Grid>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add">
@@ -105,23 +124,7 @@ export default function ServerCard(props) {
         <IconButton aria-label="share">
           <ShareIcon color="primary" />
         </IconButton>
-
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon color="secondary" label="more info" />
-        </IconButton>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>{serverInfo.longDescription}</Typography>
-        </CardContent>
-      </Collapse>
     </Card>
   );
 }

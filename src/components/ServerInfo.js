@@ -1,51 +1,85 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import ImageIcon from "@material-ui/icons/Image";
-import WorkIcon from "@material-ui/icons/Work";
-import BeachAccessIcon from "@material-ui/icons/BeachAccess";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: "100%",
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
+    "& > *": {
+      margin: theme.spacing(1),
+      width: "25ch"
+    },
+    grid: {
+      color: "white"
+    }
   }
 }));
 
-export default function FolderList() {
+export default function ServerInfo(props) {
   const classes = useStyles();
 
+  let serverInfo = {
+    exp: props.experiencia ? props.experiencia : "--",
+    masterExp: props.masterExp ? props.masterExp : "--",
+    drop: props.drop ? props.drop : "--",
+    version: props.version ? props.version : "--"
+  };
+
+  function getLabel(value) {
+    return <Typography style={{ color: "white" }}>{value}</Typography>;
+  }
+
   return (
-    <List className={classes.root}>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <ImageIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Photos" secondary="Jan 9, 2014" />
-      </ListItem>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <WorkIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Work" secondary="Jan 7, 2014" />
-      </ListItem>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <BeachAccessIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Vacation" secondary="July 20, 2014" />
-      </ListItem>
-    </List>
+    <Grid container spacing={1}>
+      <Grid item lg={3}>
+        <TextField
+          variant="filled"
+          InputProps={{
+            readOnly: true
+          }}
+          id="standard-basic"
+          label={getLabel("Experiencia")}
+          value={serverInfo.exp}
+          size="small"
+        />
+      </Grid>
+      <Grid item lg={3}>
+        <TextField
+          variant="filled"
+          InputProps={{
+            readOnly: true
+          }}
+          id="standard-basic"
+          label={getLabel("Master Exp")}
+          value={serverInfo.masterExp}
+          size="small"
+        />
+      </Grid>
+      <Grid item lg={3}>
+        <TextField
+          variant="filled"
+          InputProps={{
+            readOnly: true
+          }}
+          id="standard-basic"
+          label={getLabel("Drop")}
+          value={serverInfo.drop}
+          size="small"
+        />
+      </Grid>
+      <Grid item lg={3}>
+        <TextField
+          variant="filled"
+          InputProps={{
+            readOnly: true
+          }}
+          id="standard-basic"
+          label={getLabel("Version")}
+          value={serverInfo.drop}
+          size="small"
+        />
+      </Grid>
+    </Grid>
   );
 }
