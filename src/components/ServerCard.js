@@ -87,7 +87,7 @@ export default function ServerCard(props) {
         title="Paella dish"
       />
       <CardContent>
-        <Typography variant="body2" color="#7f8b92" component="p">
+        <Typography variant="body2" component="p">
           {serverInfo.description}
         </Typography>
       </CardContent>
