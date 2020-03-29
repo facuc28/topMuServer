@@ -14,10 +14,10 @@ import ShareIcon from "@material-ui/icons/Share";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Grid from "@material-ui/core/Grid";
 import Chip from "@material-ui/core/Chip";
+import InfoIcon from "@material-ui/icons/Info";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: "350",
     marginTop: "1vh",
     backgroundColor: "#343a40",
     color: "#7f8b92"
@@ -26,24 +26,10 @@ const useStyles = makeStyles(theme => ({
     height: 0,
     paddingTop: "20.25%"
   },
-  expand: {
-    color: "#7f8b92",
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest
-    })
-  },
-  expandOpen: {
-    transform: "rotate(180deg)",
-    color: "#7f8b92"
-  },
   avatar: {
     backgroundColor: "#f39c12"
   },
-  chip: {
-    background: "#607D8B"
-  }
+  chip: {}
 }));
 
 export default function ServerCard(props) {
@@ -72,6 +58,10 @@ export default function ServerCard(props) {
     return "Experiencia: x500";
   }
 
+  function getAvatar() {
+    return <InfoIcon color="primary" />;
+  }
+
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -93,24 +83,48 @@ export default function ServerCard(props) {
         title="Paella dish"
       />
       <CardContent>
-        <Grid container spacing={1}>
-          <Grid item>
-            <Chip label={getLabel()} className={classes.chip} />
+        <Grid container spacing={3}>
+          <Grid item lg={4}>
+            <Chip
+              avatar={getAvatar()}
+              label={getLabel()}
+              className={classes.chip}
+            />
           </Grid>
-          <Grid item>
-            <Chip label={getLabel()} className={classes.chip} />
+          <Grid item lg={4}>
+            <Chip
+              avatar={getAvatar()}
+              label={getLabel()}
+              className={classes.chip}
+            />
           </Grid>
-          <Grid item>
-            <Chip label={getLabel()} className={classes.chip} />
+          <Grid item lg={4}>
+            <Chip
+              avatar={getAvatar()}
+              label={getLabel()}
+              className={classes.chip}
+            />
           </Grid>
-          <Grid item>
-            <Chip label={getLabel()} className={classes.chip} />
+          <Grid item lg={4}>
+            <Chip
+              avatar={getAvatar()}
+              label={getLabel()}
+              className={classes.chip}
+            />
           </Grid>
-          <Grid item>
-            <Chip label={getLabel()} className={classes.chip} />
+          <Grid item lg={4}>
+            <Chip
+              avatar={getAvatar()}
+              label={getLabel()}
+              className={classes.chip}
+            />
           </Grid>
-          <Grid item>
-            <Chip label={getLabel()} className={classes.chip} />
+          <Grid item lg={4}>
+            <Chip
+              avatar={getAvatar()}
+              label={getLabel()}
+              className={classes.chip}
+            />
           </Grid>
         </Grid>
       </CardContent>

@@ -23,10 +23,12 @@ export default function ServerList(props) {
 
   function FormRow() {
     return (
-      <Grid container>
+      <Grid container spacing={1}>
+        <Grid item lg={12} md={12}>
+          <TopServers />
+        </Grid>
         <Grid item xs={2} md={2} lg={3} />
         <Grid item xs={8} md={8} lg={6}>
-         <TopServers />
           {serversInformation.map(serverInfo => (
             <ol key={serverInfo.position}>
               <ServerCard serverInfo={serverInfo} />
