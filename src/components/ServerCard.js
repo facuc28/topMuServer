@@ -93,7 +93,7 @@ export default function ServerCard(props) {
         title="Paella dish"
       />
       <CardContent>
-        <ServerInfo />
+        <ServerInfo {...serverInfo} />
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add">

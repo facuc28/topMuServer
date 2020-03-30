@@ -10,48 +10,8 @@ import Grid from "@material-ui/core/Grid";
 import AppButton from "./AppButton";
 import "../css/styles.css";
 
-class Header extends React.Component {
-  constructor() {
-    super();
-
-    if (_.get(this.state, "isLoggedIn", true)) {
-      this.state = this.getInitialState();
-    }
-  }
-
-  getInitialState() {
-    return {
-      isLoggedIn: false,
-      user: {
-        name: "Anonimous",
-        lastName: "User"
-      }
-    };
-  }
-
-  componentDidMount() {
-    const url = "https://my-json-server.typicode.com/facuc28/mock-data/db";
-
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          isLoggedIn: true,
-          user: {
-            name: data.profile.name,
-            lastName: data.profile.lastName,
-            profilePic: data.profile.profilePictureUrl
-          }
-        });
-      })
-      .catch(console.log);
-  }
-
-  render() {
-    return this.renderHeader();
-  }
-
-  renderHeader() {
+export default function Header(props) {
+  function renderHeader(props) {
     return (
       <div className="header">
         <AppBar className="navBar" position="static">
@@ -62,9 +22,9 @@ class Header extends React.Component {
               alignItems="center"
               justify="space-between"
             >
-              <Grid item>{this.renderMenuIcon()}</Grid>
-              <Grid item>{this.renderUserInformation()}</Grid>
-              <Grid item>{this.renderActionButtons()}</Grid>
+              <Grid>{renderMenuIcon()}</Grid>
+              <Grid>{renderUserInformation(props)}</Grid>
+              <Grid>{renderActionButtons(props)}</Grid>
             </Grid>
           </Toolbar>
         </AppBar>
@@ -72,16 +32,16 @@ class Header extends React.Component {
     );
   }
 
-  renderActionButtons() {
+  function renderActionButtons(props) {
     let content = {
-      section1: <AppButton {...this.getRegisterButtonProps()} />,
-      section2: <AppButton {...this.getLoginButtonProps()} />
+      section1: <AppButton {...getRegisterButtonProps()} />,
+      section2: <AppButton {...getLoginButtonProps(props.handleLogin)} />
     };
 
-    if (this.state.isLoggedIn) {
-      let user = this.state.user;
+    if (props.isLoggedIn) {
+      let user = props.user;
       content = {
-        section1: <AppButton {...this.getLogoutButtonProps()} />,
+        section1: <AppButton {...getLogoutButtonProps(props.handleLogout)} />,
         section2: <Avatar className="avatar" src={user.profilePic} />
       };
     }
@@ -96,12 +56,13 @@ class Header extends React.Component {
     return dataToRender;
   }
 
-  renderUserInformation() {
-    let dataToRender = "Welcome Anonimous";
+  function renderUserInformation(props) {
+    let dataToRender = "Bienvenido Anonimous";
 
-    if (this.state.isLoggedIn) {
-      let user = this.state.user;
-      dataToRender = "Welcome " + user.name.concat(" ", user.lastName);
+    if (props.isLoggedIn) {
+      console.log(props);
+      let user = props.user;
+      dataToRender = "Bienvenido " + user.name.concat(" ", user.lastName);
     }
 
     return (
@@ -111,7 +72,7 @@ class Header extends React.Component {
     );
   }
 
-  renderMenuIcon() {
+  function renderMenuIcon() {
     return (
       <IconButton
         edge="start"
@@ -124,41 +85,25 @@ class Header extends React.Component {
     );
   }
 
-  getLoginButtonProps() {
+  function getLoginButtonProps(handleLogin) {
     return {
       title: "Login",
-      onSubmit: this.handleLogin
+      onSubmit: handleLogin
     };
   }
 
-  getRegisterButtonProps() {
+  function getRegisterButtonProps() {
     return {
       title: "Registrar"
     };
   }
 
-  getLogoutButtonProps() {
+  function getLogoutButtonProps(handleLogout) {
     return {
       title: "Logout",
-      onClick: this.handleLogout
+      onClick: handleLogout
     };
   }
 
-  handleLogout = () => {
-    this.setState(this.getInitialState());
-  };
-
-  handleLogin = e => {
-    e.preventDefault();
-
-    this.setState({
-      isLoggedIn: true,
-      user: {
-        name: e.target[0].value,
-        lastName: "Crusta"
-      }
-    });
-  };
+  return renderHeader(props);
 }
-
-export default Header;

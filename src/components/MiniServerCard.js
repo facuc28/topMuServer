@@ -28,13 +28,18 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     backgroundColor: "#f39c12"
-  },
-  chip: {}
+  }
 }));
 
 export default function ServerCard(props) {
   let serverInfo = {
     name: "Server Name",
+    experiencia: "--",
+    drop: "--",
+    version: "--",
+    masterExp: "--",
+    resetPoints: "--",
+    resetLvl: "--",
     position: 1,
     votes: 10,
     lastRefresh: "September 14, 2016",
@@ -44,8 +49,8 @@ export default function ServerCard(props) {
     longDescription: "Server extended information with rates and server rules"
   };
 
-  if (props.serverInfo) {
-    serverInfo = props.serverInfo;
+  if (props.name) {
+    serverInfo = props;
   }
 
   const classes = useStyles();
@@ -54,8 +59,8 @@ export default function ServerCard(props) {
     return <Typography type="h1">{serverInfo.name}</Typography>;
   }
 
-  function getLabel() {
-    return "Experiencia: x500";
+  function getLabel(key, value) {
+    return key + ": " + value;
   }
 
   function getAvatar() {
@@ -83,46 +88,46 @@ export default function ServerCard(props) {
         title="Paella dish"
       />
       <CardContent>
-        <Grid container spacing={3}>
-          <Grid item lg={4}>
+        <Grid container alignItems="center" justify="center" spacing={3}>
+          <Grid item lg={4} md={6} sm={4}>
             <Chip
               avatar={getAvatar()}
-              label={getLabel()}
+              label={getLabel("Experiencia", serverInfo.experiencia)}
               className={classes.chip}
             />
           </Grid>
-          <Grid item lg={4}>
+          <Grid item lg={4} md={6} sm={4}>
             <Chip
               avatar={getAvatar()}
-              label={getLabel()}
+              label={getLabel("Master Exp", serverInfo.masterExp)}
               className={classes.chip}
             />
           </Grid>
-          <Grid item lg={4}>
+          <Grid item lg={4} md={6} sm={4}>
             <Chip
               avatar={getAvatar()}
-              label={getLabel()}
+              label={getLabel("Drop", serverInfo.drop)}
               className={classes.chip}
             />
           </Grid>
-          <Grid item lg={4}>
+          <Grid item lg={4} md={6} sm={4}>
             <Chip
               avatar={getAvatar()}
-              label={getLabel()}
+              label={getLabel("Version", serverInfo.version)}
               className={classes.chip}
             />
           </Grid>
-          <Grid item lg={4}>
+          <Grid item lg={4} md={6} sm={4}>
             <Chip
               avatar={getAvatar()}
-              label={getLabel()}
+              label={getLabel("Reset LVL", serverInfo.resetLvl)}
               className={classes.chip}
             />
           </Grid>
-          <Grid item lg={4}>
+          <Grid item lg={4} md={6} sm={4}>
             <Chip
               avatar={getAvatar()}
-              label={getLabel()}
+              label={getLabel("Borra Puntos", serverInfo.resetPoints)}
               className={classes.chip}
             />
           </Grid>

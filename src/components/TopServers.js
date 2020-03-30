@@ -9,21 +9,27 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function TopServers() {
+export default function TopServers(props) {
   const classes = useStyles();
 
   return (
-    <Grid container spacing={1} style={{ marginTop: "5px" }}>
-      <Grid item lg={2} md={2} sm={2} />
+    <Grid
+      container
+      alignItems="center"
+      justify="center"
+      spacing={1}
+      style={{ marginTop: "5px" }}
+    >
+      <Grid item lg={2} md={2} />
 
-      <Grid item lg={4} md={4} sm={4}>
-        <MiniServerCard />
+      <Grid item lg={4} md={4}>
+        <MiniServerCard {...props} />
       </Grid>
-      <Grid item lg={4} md={4} sm={4}>
-        <MiniServerCard />
+      <Grid item lg={4} md={4}>
+        <MiniServerCard {...props} />
       </Grid>
 
-      <Grid item lg={2} md={2} sm={2} />
+      <Grid item lg={2} md={2} />
     </Grid>
   );
 }

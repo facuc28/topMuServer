@@ -76,7 +76,7 @@ export default function ServerInfo(props) {
           }}
           id="standard-basic"
           label={getLabel("Version")}
-          value={serverInfo.drop}
+          value={serverInfo.version}
           size="small"
         />
       </Grid>
