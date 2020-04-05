@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import ServerCard from "./ServerCard";
 import TopServers from "./TopServers";
 import Acordion from "./Acordion";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,15 +21,40 @@ const useStyles = makeStyles(theme => ({
 
 export default function ServerList(props) {
   const classes = useStyles();
-  const serversInformation = props.serverInfo
-    ? props.serverInfo
-    : getServerInfoProps();
+
+  function renderServerList() {
+    let dataToRender = (
+      <Skeleton animation="wave" variant="circle" width={40} height={40} />
+    );
+
+    if (props.serverInfo) {
+      dataToRender = props.serverInfo.map(serverInfo => (
+        <ol key={serverInfo.position}>
+          <ServerCard serverInfo={serverInfo} />
+        </ol>
+      ));
+    }
+
+    return dataToRender;
+  }
+
+  function getTopServers() {
+    let dataToRender = (
+      <Skeleton animation="wave" variant="circle" width={40} height={40} />
+    );
+
+    if (props.serverInfo) {
+      dataToRender = props.serverInfo[0];
+    }
+
+    return dataToRender;
+  }
 
   function FormRow() {
     return (
       <Grid container alignItems="center" justify="center" spacing={2}>
         <Grid item lg={12} md={12}>
-          <TopServers {...serversInformation[0]} />
+          <TopServers {...getTopServers()} />
         </Grid>
         <Grid item lg={3} md={2} />
         <Grid item lg={6} md={8}>
@@ -37,11 +63,7 @@ export default function ServerList(props) {
         <Grid item lg={3} md={2} />
         <Grid item xs={2} md={2} lg={2} />
         <Grid item xs={8} md={8} lg={8}>
-          {serversInformation.map(serverInfo => (
-            <ol key={serverInfo.position}>
-              <ServerCard serverInfo={serverInfo} />
-            </ol>
-          ))}
+          {renderServerList()}
         </Grid>
         <Grid item xs={2} md={2} lg={2} />
       </Grid>

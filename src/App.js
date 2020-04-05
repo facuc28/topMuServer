@@ -7,29 +7,40 @@ class App extends React.Component {
   constructor() {
     super();
 
-    this.state = {
-      isLoggedIn: false,
-      serverList: []
-    };
+    if (!this.state) {
+      this.state = {
+        isLoggedIn: false
+      };
+    }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const url = "https://my-json-server.typicode.com/facuc28/mock-data/db";
+    const user = JSON.parse(sessionStorage.getItem("user-store"));
+    let response;
 
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          isLoggedIn: true,
-          user: {
-            name: data.profile.name,
-            lastName: data.profile.lastName,
-            profilePic: data.profile.profilePictureUrl
-          },
-          serverList: data.serverList
-        });
-      })
-      .catch(console.log);
+    if (!sessionStorage["servers-store"]) {
+      response = await fetch(url);
+      const data = await response.json();
+
+      console.log("what" + data);
+
+      sessionStorage.setItem("servers-store", JSON.stringify(data));
+
+      this.setState({
+        isLoggedIn: user ? user.isLoggedIn : false,
+        user: user,
+        serverList: data.serverList
+      });
+    } else {
+      const serverStore = JSON.parse(sessionStorage.getItem("servers-store"));
+
+      this.setState({
+        isLoggedIn: user ? user.isLoggedIn : false,
+        user: user,
+        serverList: serverStore.serverList
+      });
+    }
   }
 
   render() {
