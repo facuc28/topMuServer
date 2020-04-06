@@ -4,16 +4,6 @@ import Header from "./components/Header";
 import ServerList from "./components/ServerList";
 
 class App extends React.Component {
-  constructor() {
-    super();
-
-    if (!this.state) {
-      this.state = {
-        isLoggedIn: false
-      };
-    }
-  }
-
   async componentDidMount() {
     const url = "https://my-json-server.typicode.com/facuc28/mock-data/db";
     const user = JSON.parse(sessionStorage.getItem("user-store"));
@@ -23,9 +13,7 @@ class App extends React.Component {
       response = await fetch(url);
       const data = await response.json();
 
-      console.log("what" + data);
-
-      sessionStorage.setItem("servers-store", JSON.stringify(data));
+      sessionStorage.setItem("servers-store", JSON.stringify(data.serverList));
 
       this.setState({
         isLoggedIn: user ? user.isLoggedIn : false,
@@ -33,12 +21,12 @@ class App extends React.Component {
         serverList: data.serverList
       });
     } else {
-      const serverStore = JSON.parse(sessionStorage.getItem("servers-store"));
+      const serverList = JSON.parse(sessionStorage.getItem("servers-store"));
 
       this.setState({
-        isLoggedIn: user ? user.isLoggedIn : false,
+        isLoggedIn: user.name ? true : false,
         user: user,
-        serverList: serverStore.serverList
+        serverList: serverList
       });
     }
   }
@@ -47,38 +35,74 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header {...this.getHeaderProps()} />
-        <ServerList serverInfo={this.state.serverList} />
+        <ServerList serverInfo={this.getServerList()} />
       </div>
     );
   }
 
+  getServerList() {
+    let serverList;
+
+    if (this.state) {
+      serverList = this.state.serverList;
+    }
+
+    return serverList;
+  }
+
   getHeaderProps() {
+    let state = {
+      isLoggedIn: false
+    };
+
+    if (this.state) {
+      state = this.state;
+    }
+
     return {
-      isLoggedIn: this.state.isLoggedIn,
+      isLoggedIn: state.isLoggedIn,
       handleLogin: this.handleLogin,
       handleLogout: this.handleLogout,
-      user: this.state.user,
-      serverList: this.state.serverList
+      user: state.user,
+      serverList: state.serverList
     };
+  }
+
+  getUserInformation() {
+    const user = JSON.parse(sessionStorage.getItem("user-store"));
+
+    if (!user) {
+      fetch("https://my-json-server.typicode.com/facuc28/mock-data/db")
+        .then(res => res.json())
+        .then(data => {
+          sessionStorage.setItem("user-store", JSON.stringify(data.profile));
+
+          this.setState({
+            isLoggedIn: true,
+            user: {
+              name: data.profile.name,
+              lastName: data.profile.lastName,
+              profilePictureUrl: data.profile.profilePictureUrl
+            },
+            serverList: data.serverList
+          });
+        })
+        .catch(console.log);
+    } else {
+      this.setState({
+        isLoggedIn: true,
+        user: {
+          name: user.name,
+          lastName: user.lastName,
+          profilePictureUrl: user.profilePictureUrl
+        }
+      });
+    }
   }
 
   handleLogin = e => {
     e.preventDefault();
-
-    fetch("https://my-json-server.typicode.com/facuc28/mock-data/db")
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          isLoggedIn: true,
-          user: {
-            name: data.profile.name,
-            lastName: data.profile.lastName,
-            profilePic: data.profile.profilePictureUrl
-          },
-          serverList: data.serverList
-        });
-      })
-      .catch(console.log);
+    this.getUserInformation();
   };
 
   handleLogout = e => {

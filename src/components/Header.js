@@ -42,7 +42,7 @@ export default function Header(props) {
       let user = props.user;
       content = {
         section1: <AppButton {...getLogoutButtonProps(props.handleLogout)} />,
-        section2: <Avatar className="avatar" src={user.profilePic} />
+        section2: <Avatar className="avatar" src={user.profilePictureUrl} />
       };
     }
 

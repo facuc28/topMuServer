@@ -1,7 +1,7 @@
 {
-  "name": "top-mu-server",
+  "name": "top-mu-servers",
   "version": "1.0.0",
-  "description": "Top mu server react UI",
+  "description": "",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
