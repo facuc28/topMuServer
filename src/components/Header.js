@@ -22,9 +22,9 @@ export default function Header(props) {
               alignItems="center"
               justify="space-between"
             >
-              <Grid>{renderMenuIcon()}</Grid>
-              <Grid>{renderUserInformation(props)}</Grid>
-              <Grid>{renderActionButtons(props)}</Grid>
+              <Grid item>{renderMenuIcon()}</Grid>
+              <Grid item>{renderUserInformation(props)}</Grid>
+              <Grid item>{renderActionButtons(props)}</Grid>
             </Grid>
           </Toolbar>
         </AppBar>

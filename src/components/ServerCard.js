@@ -19,7 +19,6 @@ import ServerInfo from "./ServerInfo";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: "350",
     marginTop: "1vh",
     backgroundColor: "#343a40",
     color: "#7f8b92"
@@ -29,9 +28,9 @@ const useStyles = makeStyles(theme => ({
     paddingTop: "20.25%"
   },
   expand: {
+    marginLeft: "auto",
     color: "#7f8b92",
     transform: "rotate(0deg)",
-    marginLeft: "auto",
     transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest
     })
