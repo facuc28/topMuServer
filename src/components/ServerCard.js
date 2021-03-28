@@ -51,8 +51,7 @@ export default function ServerCard(props) {
     position: 1,
     votes: 10,
     lastRefresh: "September 14, 2016",
-    imgUrl:
-      "http://top.tuservermu.com.ve/template/img/uploads/servers/banner_5cd336de7ce8e.gif",
+    imgUrl: "https://i.imgur.com/NRodHCn.jpg",
     description: "Server Description information.",
     longDescription: "Server extended information with rates and server rules"
   };
