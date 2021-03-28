@@ -10,6 +10,7 @@ import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
+import ChatIcon from "@material-ui/icons/Chat";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Typography from "@material-ui/core/Typography";
 import ShareIcon from "@material-ui/icons/Share";
@@ -42,6 +43,18 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     backgroundColor: "#f39c12"
+  },
+  title: {
+    color: "#f5f6fa"
+  },
+  comment: {
+    color: "#487eb0"
+  },
+  share: {
+    color: "#487eb0"
+  },
+  vote: {
+    color: "#44bd32"
   }
 }));
 
@@ -68,14 +81,22 @@ export default function ServerCard(props) {
     setExpanded(!expanded);
   };
 
+  const handleVote = () => {
+    console.log("vote up");
+  };
+
   function getCardTitle() {
-    return <Typography variant="h4">{serverInfo.name}</Typography>;
+    return (
+      <Typography className={classes.title} variant="h4">
+        {serverInfo.name}
+      </Typography>
+    );
   }
 
   function getButtonProps() {
     return {
       type: "add",
-      content: <AddCircleIcon type="add" style={{ color: "green" }} />
+      content: <AddCircleIcon type="add" className={classes.vote} />
     };
   }
 
@@ -97,18 +118,21 @@ export default function ServerCard(props) {
       <CardMedia
         className={classes.media}
         image={serverInfo.imgUrl}
-        title="Paella dish"
+        title={serverInfo.name}
       />
       <CardContent>
         <ServerInfo {...serverInfo} />
       </CardContent>
       <CardActions disableSpacing>
-        <ActionButton button={getButtonProps()} />
-        <IconButton aria-label="remove" color="secondary">
-          <RemoveCircleIcon />
+        <ActionButton onClick={handleVote} button={getButtonProps()} />
+        <IconButton
+          aria-label="Agregar un comentario"
+          className={classes.comment}
+        >
+          <ChatIcon />
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon color="primary" />
+        <IconButton aria-label="Compartir">
+          <ShareIcon className={classes.share} />
         </IconButton>
 
         <IconButton
