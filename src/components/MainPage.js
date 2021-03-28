@@ -69,16 +69,16 @@ export default function MainPage(props) {
         <Grid item lg={12} md={12}>
           <TopServers {...getTopServers()} />
         </Grid>
-        <Grid item lg={3} md={2} />
-        <Grid item lg={6} md={8}>
+        <Grid item md={2} lg={3} />
+        <Grid item md={8} lg={6} >
           {renderUserPanel()}
         </Grid>
         <Grid item md={2} lg={3} />
-        <Grid item md={3} lg={3} />
-        <Grid item md={6} lg={6}>
+        <Grid item md={2} lg={3} />
+        <Grid item md={8} lg={6}>
           {renderServerList()}
         </Grid>
-        <Grid item md={3} lg={3} />
+        <Grid item md={2} lg={3} />
       </Grid>
     );
   }

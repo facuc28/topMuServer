@@ -34,7 +34,7 @@ export default function ServerInfo(props) {
 
   return (
     <Grid container alignContent="center" justify="center" spacing={1}>
-      <Grid item lg={3}>
+      <Grid item md={4} lg={3}>
         <TextField
           variant="filled"
           InputProps={{
@@ -46,7 +46,7 @@ export default function ServerInfo(props) {
           size="small"
         />
       </Grid>
-      <Grid item lg={3}>
+      <Grid item md={4} lg={3}>
         <TextField
           variant="filled"
           InputProps={{
@@ -58,7 +58,7 @@ export default function ServerInfo(props) {
           size="small"
         />
       </Grid>
-      <Grid item lg={3}>
+      <Grid item md={4} lg={3}>
         <TextField
           variant="filled"
           InputProps={{
@@ -70,7 +70,7 @@ export default function ServerInfo(props) {
           size="small"
         />
       </Grid>
-      <Grid item lg={3}>
+      <Grid item md={4} lg={3}>
         <TextField
           variant="filled"
           InputProps={{
@@ -82,7 +82,7 @@ export default function ServerInfo(props) {
           size="small"
         />
       </Grid>
-      <Grid item lg={3}>
+      <Grid item md={4} lg={3}>
         <TextField
           variant="filled"
           InputProps={{
@@ -94,7 +94,7 @@ export default function ServerInfo(props) {
           size="small"
         />
       </Grid>
-      <Grid item lg={3}>
+      <Grid item md={4} lg={3}>
         <TextField
           variant="filled"
           InputProps={{
@@ -106,7 +106,7 @@ export default function ServerInfo(props) {
           size="small"
         />
       </Grid>
-      <Grid item lg={3}>
+      <Grid item md={4} lg={3}>
         <TextField
           variant="filled"
           InputProps={{
@@ -118,7 +118,7 @@ export default function ServerInfo(props) {
           size="small"
         />
       </Grid>
-      <Grid item lg={3}>
+      <Grid item md={4} lg={3}>
         <TextField
           variant="filled"
           InputProps={{

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
@@ -9,15 +9,14 @@ import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
-import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
 import ChatIcon from "@material-ui/icons/Chat";
+import Button from '@material-ui/core/Button';
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Typography from "@material-ui/core/Typography";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ServerInfo from "./ServerInfo";
-import ActionButton from "./ActionButton";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,10 +54,19 @@ const useStyles = makeStyles((theme) => ({
   },
   vote: {
     color: "#44bd32"
+  },
+  site: {
+    padding: "1px",
+    backgroundColor: "#FFBF27",
+    border: "1px solid #FFBF27",
+    borderRadius: "2px",
+    fontSize: 10,
+    fontWeight: "bold",
   }
 }));
 
 export default function ServerCard(props) {
+  const [loading, setLoading] = useState(false);
   let serverInfo = {
     name: "Server Name",
     position: 1,
@@ -82,7 +90,11 @@ export default function ServerCard(props) {
   };
 
   const handleVote = () => {
-    console.log("vote up");
+    setLoading(true);
+  
+    setTimeout(function () {
+      setLoading(false);
+    }, 1000);
   };
 
   function getCardTitle() {
@@ -93,11 +105,14 @@ export default function ServerCard(props) {
     );
   }
 
-  function getButtonProps() {
-    return {
-      type: "add",
-      content: <AddCircleIcon type="add" className={classes.vote} />
-    };
+  function renderVoteIcon() {
+    let value = <AddCircleIcon onClick={handleVote} type="add" className={classes.vote} />;
+
+    if(loading) {
+      value = <CircularProgress size="small"/>
+    }
+
+    return value;
   }
 
   return (
@@ -109,8 +124,10 @@ export default function ServerCard(props) {
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
+          <IconButton aria-label="visitar sitio">
+             <Button size="small" className={classes.site}>
+          Visitar
+        </Button>
           </IconButton>
         }
         title={getCardTitle()}
@@ -124,7 +141,12 @@ export default function ServerCard(props) {
         <ServerInfo {...serverInfo} />
       </CardContent>
       <CardActions disableSpacing>
-        <ActionButton onClick={handleVote} button={getButtonProps()} />
+        <IconButton
+          aria-label="Votar +1"
+          className={classes.vote}
+        >
+          {renderVoteIcon()}
+        </IconButton>
         <IconButton
           aria-label="Agregar un comentario"
           className={classes.comment}
