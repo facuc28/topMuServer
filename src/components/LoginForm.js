@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -9,7 +9,7 @@ import Divider from "@material-ui/core/Divider";
 import HelpIcon from "@material-ui/icons/Help";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
       margin: theme.spacing(1)
@@ -51,6 +51,8 @@ const useStyles = makeStyles(theme => ({
 function handleErrorLogin() {}
 
 export default function LoginForm(props) {
+  const [user, setUser] = useState('');
+  const [pass, setPass] = useState('');
   const classes = useStyles();
   let form = props.form
     ? props.form
@@ -58,6 +60,22 @@ export default function LoginForm(props) {
         title: "Ingresar",
         onSubmit: handleErrorLogin
       };
+
+  const handleUserChange = (e) => {
+    setUser(e.target.value);
+  };
+
+  const handlePassChange = (e) => {
+    setPass(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    form.onSubmit({
+      userName: user,
+      password: pass
+    })
+  }
 
   return (
     <Paper className={classes.paper} elevation={3}>
@@ -75,14 +93,18 @@ export default function LoginForm(props) {
         </Grid>
         <Grid item xs={12} md={12} lg={12}>
           <form
-            onSubmit={form.onSubmit}
+            onSubmit={handleSubmit}
             className={classes.root}
             noValidate
             autoComplete="off"
           >
             <div>
-              <TextField id="user" label="Usuario" />
-              <TextField id="pass" label="Contraseña" type="password" />
+              <TextField
+                id="user"
+                onChange={handleUserChange}
+                label="Usuario"
+              />
+              <TextField id="pass" onChange={handlePassChange} label="Contraseña" type="password" />
               <Button
                 className={classes.button}
                 type="submit"

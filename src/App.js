@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import "./styles.css";
 import Header from "./components/Header";
 import MainPage from "./components/MainPage";
@@ -9,7 +9,6 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const url = "https://my-json-server.typicode.com/facuc28/mock-data/db";
     const storeUser = JSON.parse(sessionStorage.getItem("user-store"));
     let serverList = JSON.parse(sessionStorage.getItem("servers-store"));
 
@@ -46,33 +45,26 @@ export default function App() {
     };
   }
 
-  const getUserInformation = () => {
-    const storeUser = JSON.parse(sessionStorage.getItem("user-store"));
+  const fetchUserInformation = (userData) => {
+    console.log("userData: " + userData.userName + " " + userData.password);
 
-    if (!storeUser) {
-      fetch("https://my-json-server.typicode.com/facuc28/mock-data/db")
-        .then((res) => res.json())
-        .then((data) => {
-          sessionStorage.setItem("user-store", JSON.stringify(data.profile));
+    fetch("https://my-json-server.typicode.com/facuc28/mock-data/db")
+      .then((res) => res.json())
+      .then((data) => {
+        sessionStorage.setItem("user-store", JSON.stringify(data.profile));
 
-          setUser({
-            name: data.profile.name,
-            lastName: data.profile.lastName,
-            profilePictureUrl: data.profile.profilePictureUrl
-          });
-          setServers(data.serverList);
-          setIsLoggedIn(true);
-        })
-        .catch(console.log);
-    } else {
-      setUser(storeUser);
-      setIsLoggedIn(true);
-    }
+        setUser({
+          name: data.profile.name,
+          lastName: data.profile.lastName,
+          profilePictureUrl: data.profile.profilePictureUrl
+        });
+        setIsLoggedIn(true);
+      })
+      .catch(console.log);
   };
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    getUserInformation();
+  const handleLogin = (userData) => {
+    fetchUserInformation(userData);
   };
 
   const handleLogout = (e) => {

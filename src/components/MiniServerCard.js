@@ -15,7 +15,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Grid from "@material-ui/core/Grid";
 import Chip from "@material-ui/core/Chip";
 import InfoIcon from "@material-ui/icons/Info";
-import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
+import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     backgroundColor: "#f39c12"
+  },
+  chip: {
+    minWidth: "150px"
   }
 }));
 
@@ -107,7 +110,7 @@ export default function ServerCard(props) {
           <Grid item lg={4} md={6} sm={4}>
             <Chip
               avatar={getAvatar()}
-              label={getLabel("Drop", serverInfo.drop)}
+              label={getLabel("Excellent Drop", serverInfo.drop)}
               className={classes.chip}
             />
           </Grid>

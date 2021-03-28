@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ControlledExpansionPanels() {
+export default function Acordion() {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -77,28 +77,7 @@ export default function ControlledExpansionPanels() {
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
-      <ExpansionPanel
-        className={classes.root}
-        expanded={expanded === "panel3"}
-        onChange={handleChange("panel3")}
-      >
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3bh-content"
-          id="panel3bh-header"
-        >
-          <Typography className={classes.heading}>Sobre Nosotros</Typography>
-          <Typography className={classes.secondaryHeading}>
-            Todo lo que necesitas saber sobre nosotros
-          </Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer
-            sit amet egestas eros, vitae egestas augue. Duis vel est augue.
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
+
     </div>
   );
 }
