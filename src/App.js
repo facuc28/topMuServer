@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.css";
 import Header from "./components/Header";
-import ServerList from "./components/ServerList";
+import MainPage from "./components/MainPage";
 
 class App extends React.Component {
   async componentDidMount() {
@@ -24,7 +24,7 @@ class App extends React.Component {
       const serverList = JSON.parse(sessionStorage.getItem("servers-store"));
 
       this.setState({
-        isLoggedIn: user.name ? true : false,
+        isLoggedIn: user ? true : false,
         user: user,
         serverList: serverList
       });
@@ -35,9 +35,22 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header {...this.getHeaderProps()} />
-        <ServerList serverInfo={this.getServerList()} />
+        <MainPage
+          serverInfo={this.getServerList()}
+          isLoggedIn={this.getIsLoggedIn()}
+        />
       </div>
     );
+  }
+
+  getIsLoggedIn() {
+    let isLoggedIn = false;
+
+    if (this.state && this.state.isLoggedIn) {
+      isLoggedIn = true;
+    }
+
+    return isLoggedIn;
   }
 
   getServerList() {
@@ -106,6 +119,8 @@ class App extends React.Component {
   };
 
   handleLogout = e => {
+    sessionStorage.removeItem("user-store");
+
     this.setState({
       isLoggedIn: false
     });

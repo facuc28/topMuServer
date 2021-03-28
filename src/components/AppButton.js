@@ -12,12 +12,6 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     justifyContent: "center"
   },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3)
-  },
   button: {
     backgroundColor: "#FFBF27",
     border: "1px solid #FFBF27",
@@ -38,12 +32,8 @@ export default function AppButton(props) {
   };
 
   let button = {
-    title: props.title ? props.title : "Title",
-    onClick: props.onClick ? props.onClick : handleOpen
-  };
-  let form = {
-    title: "Ingresa tus datos para acceder",
-    onSubmit: props.onSubmit
+    title: props.button ? props.button.title : "Title",
+    onClick: props.button.onClick ? props.button.onClick : handleOpen
   };
 
   return (
@@ -68,9 +58,7 @@ export default function AppButton(props) {
         }}
       >
         <Fade in={open}>
-          <div className={classes.paper}>
-            <LoginForm form={form} />
-          </div>
+          <div className={classes.paper}>{props.content}</div>
         </Fade>
       </Modal>
     </div>

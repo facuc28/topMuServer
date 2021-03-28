@@ -9,6 +9,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import AppButton from "./AppButton";
 import "../css/styles.css";
+import LoginForm from "./LoginForm";
 
 export default function Header(props) {
   function renderHeader(props) {
@@ -34,14 +35,26 @@ export default function Header(props) {
 
   function renderActionButtons(props) {
     let content = {
-      section1: <AppButton {...getRegisterButtonProps()} />,
-      section2: <AppButton {...getLoginButtonProps(props.handleLogin)} />
+      section1: (
+        <AppButton
+          content={getRegisterFormProps()}
+          button={getRegisterButtonProps()}
+        />
+      ),
+      section2: (
+        <AppButton
+          content={getLoginFormProps(props.handleLogin)}
+          button={getLoginButtonProps()}
+        />
+      )
     };
 
     if (props.isLoggedIn) {
       let user = props.user;
       content = {
-        section1: <AppButton {...getLogoutButtonProps(props.handleLogout)} />,
+        section1: (
+          <AppButton button={getLogoutButtonProps(props.handleLogout)} />
+        ),
         section2: <Avatar className="avatar" src={user.profilePictureUrl} />
       };
     }
@@ -57,7 +70,7 @@ export default function Header(props) {
   }
 
   function renderUserInformation(props) {
-    let dataToRender = "Bienvenido Anonimous";
+    let dataToRender = "Bienvenido a TOP MU SERVERS";
 
     if (props.isLoggedIn) {
       console.log(props);
@@ -85,10 +98,17 @@ export default function Header(props) {
     );
   }
 
-  function getLoginButtonProps(handleLogin) {
-    return {
+  function getLoginFormProps(handleLogin) {
+    let formProps = {
       title: "Login",
       onSubmit: handleLogin
+    };
+    return <LoginForm form={formProps} />;
+  }
+
+  function getLoginButtonProps() {
+    return {
+      title: "Login"
     };
   }
 
@@ -96,6 +116,13 @@ export default function Header(props) {
     return {
       title: "Registrar"
     };
+  }
+
+  function getRegisterFormProps() {
+    let formProps = {
+      title: "Login"
+    };
+    return <LoginForm form={formProps} />;
   }
 
   function getLogoutButtonProps(handleLogout) {

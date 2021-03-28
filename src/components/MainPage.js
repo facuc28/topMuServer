@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ServerList(props) {
+export default function MainPage(props) {
   const classes = useStyles();
 
   function renderServerList() {
@@ -53,6 +53,16 @@ export default function ServerList(props) {
     return dataToRender;
   }
 
+  function renderUserPanel() {
+    let dataToRender;
+
+    if (props.isLoggedIn) {
+      dataToRender = <Acordion {...props.isLoggedIn} />;
+    }
+
+    return dataToRender;
+  }
+
   function FormRow() {
     return (
       <Grid container alignItems="center" justify="center" spacing={2}>
@@ -61,7 +71,7 @@ export default function ServerList(props) {
         </Grid>
         <Grid item lg={3} md={2} />
         <Grid item lg={6} md={8}>
-          <Acordion />
+          {renderUserPanel()}
         </Grid>
         <Grid item md={2} lg={3} />
         <Grid item md={3} lg={3} />

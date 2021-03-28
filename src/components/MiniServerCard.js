@@ -15,8 +15,9 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Grid from "@material-ui/core/Grid";
 import Chip from "@material-ui/core/Chip";
 import InfoIcon from "@material-ui/icons/Info";
+import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "1vh",
     backgroundColor: "#343a40",
@@ -56,7 +57,7 @@ export default function ServerCard(props) {
   const classes = useStyles();
 
   function getCardTitle() {
-    return <Typography type="h1">{serverInfo.name}</Typography>;
+    return <Typography variant="h4">{serverInfo.name}</Typography>;
   }
 
   function getLabel(key, value) {
@@ -72,7 +73,7 @@ export default function ServerCard(props) {
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            {serverInfo.position}
+            <EmojiEventsIcon />
           </Avatar>
         }
         action={

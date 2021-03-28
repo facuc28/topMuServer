@@ -4,7 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import { Typography } from "@material-ui/core";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
       margin: theme.spacing(1),
@@ -23,7 +23,9 @@ export default function ServerInfo(props) {
     exp: props.experiencia ? props.experiencia : "--",
     masterExp: props.masterExp ? props.masterExp : "--",
     drop: props.drop ? props.drop : "--",
-    version: props.version ? props.version : "--"
+    version: props.version ? props.version : "--",
+    resetLvl: props.resetLvl ? props.resetLvl : "--",
+    resetPoints: props.resetPoints ? props.resetPoints : "--"
   };
 
   function getLabel(value) {
@@ -31,7 +33,7 @@ export default function ServerInfo(props) {
   }
 
   return (
-    <Grid container spacing={1}>
+    <Grid container alignContent="center" justify="center" spacing={1}>
       <Grid item lg={3}>
         <TextField
           variant="filled"
@@ -65,6 +67,54 @@ export default function ServerInfo(props) {
           id="standard-basic"
           label={getLabel("Drop")}
           value={serverInfo.drop}
+          size="small"
+        />
+      </Grid>
+      <Grid item lg={3}>
+        <TextField
+          variant="filled"
+          InputProps={{
+            readOnly: true
+          }}
+          id="standard-basic"
+          label={getLabel("Version")}
+          value={serverInfo.version}
+          size="small"
+        />
+      </Grid>
+      <Grid item lg={3}>
+        <TextField
+          variant="filled"
+          InputProps={{
+            readOnly: true
+          }}
+          id="standard-basic"
+          label={getLabel("Reset LVL")}
+          value={serverInfo.resetLvl}
+          size="small"
+        />
+      </Grid>
+      <Grid item lg={3}>
+        <TextField
+          variant="filled"
+          InputProps={{
+            readOnly: true
+          }}
+          id="standard-basic"
+          label={getLabel("Borra Puntos")}
+          value={serverInfo.resetPoints}
+          size="small"
+        />
+      </Grid>
+      <Grid item lg={3}>
+        <TextField
+          variant="filled"
+          InputProps={{
+            readOnly: true
+          }}
+          id="standard-basic"
+          label={getLabel("Version")}
+          value={serverInfo.version}
           size="small"
         />
       </Grid>

@@ -10,14 +10,15 @@ import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
-import Typography from "@material-ui/core/Typography";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
+import Typography from "@material-ui/core/Typography";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ServerInfo from "./ServerInfo";
+import ActionButton from "./ActionButton";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "1vh",
     backgroundColor: "#343a40",
@@ -58,6 +59,7 @@ export default function ServerCard(props) {
 
   if (props.serverInfo) {
     serverInfo = props.serverInfo;
+    console.log("data:" + props.serverInfo);
   }
 
   const classes = useStyles();
@@ -68,7 +70,14 @@ export default function ServerCard(props) {
   };
 
   function getCardTitle() {
-    return <Typography type="h1">{serverInfo.name}</Typography>;
+    return <Typography variant="h4">{serverInfo.name}</Typography>;
+  }
+
+  function getButtonProps() {
+    return {
+      type: "add",
+      content: <AddCircleIcon type="add" style={{ color: "green" }} />
+    };
   }
 
   return (
@@ -95,9 +104,7 @@ export default function ServerCard(props) {
         <ServerInfo {...serverInfo} />
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add">
-          <AddCircleIcon style={{ color: "#28a745" }} />
-        </IconButton>
+        <ActionButton button={getButtonProps()} />
         <IconButton aria-label="remove" color="secondary">
           <RemoveCircleIcon />
         </IconButton>
