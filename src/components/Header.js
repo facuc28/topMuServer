@@ -33,7 +33,7 @@ export default function Header(props) {
     );
   }
 
-  function renderActionButtons(props) {
+  function renderActionButtons() {
     let content = {
       section1: (
         <AppButton
@@ -69,13 +69,13 @@ export default function Header(props) {
     return dataToRender;
   }
 
-  function renderUserInformation(props) {
+  function renderUserInformation() {
     let dataToRender = "Bienvenido a TOP MU SERVERS";
 
     if (props.isLoggedIn) {
       console.log(props);
       let user = props.user;
-      dataToRender = "Bienvenido " + user.name.concat(" ", user.lastName);
+      dataToRender = "Bienvenido " + user.firstName.concat(" ", user.lastName);
     }
 
     return (

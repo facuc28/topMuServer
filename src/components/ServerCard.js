@@ -17,11 +17,13 @@ import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ServerInfo from "./ServerInfo";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "1vh",
-    backgroundColor: "#343a40",
+    backgroundColor: "#1e272e",
     color: "#7f8b92"
   },
   media: {
@@ -62,6 +64,8 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "2px",
     fontSize: 10,
     fontWeight: "bold",
+  },
+  voteCount: {
   }
 }));
 
@@ -156,7 +160,11 @@ export default function ServerCard(props) {
         <IconButton aria-label="Compartir">
           <ShareIcon className={classes.share} />
         </IconButton>
-
+        <Chip
+        icon={<ThumbUpIcon />}
+        label={props.serverInfo.votes}
+        className={classes.voteCount}
+      />
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded
@@ -170,7 +178,7 @@ export default function ServerCard(props) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>{serverInfo.longDescription}</Typography>
+          <Typography paragraph>{serverInfo.description}</Typography>
         </CardContent>
       </Collapse>
     </Card>

@@ -5,10 +5,11 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import UserPanel from "./UserPanel";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    backgroundColor: "#343a40",
+    backgroundColor: "#1e272e",
     color: "white"
   },
   heading: {
@@ -22,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Acordion() {
+export default function Acordion(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -70,11 +71,7 @@ export default function Acordion() {
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography>
-            Donec placerat, lectus sed mattis semper, neque lectus feugiat
-            lectus, varius pulvinar diam eros in elit. Pellentesque convallis
-            laoreet laoreet.
-          </Typography>
+         <UserPanel {...props.user}/>
         </ExpansionPanelDetails>
       </ExpansionPanel>
 

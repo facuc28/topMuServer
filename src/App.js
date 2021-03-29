@@ -51,13 +51,15 @@ export default function App() {
     fetch("https://my-json-server.typicode.com/facuc28/mock-data/db")
       .then((res) => res.json())
       .then((data) => {
-        sessionStorage.setItem("user-store", JSON.stringify(data.profile));
-
-        setUser({
-          name: data.profile.name,
+        let userData = {
+          userName: 'Taglife',
+          firstName: data.profile.name,
           lastName: data.profile.lastName,
           profilePictureUrl: data.profile.profilePictureUrl
-        });
+        }
+        sessionStorage.setItem("user-store", JSON.stringify(userData));
+
+        setUser(userData);
         setIsLoggedIn(true);
       })
       .catch(console.log);
@@ -77,7 +79,7 @@ export default function App() {
   return (
     <div className="App">
       <Header {...getHeaderProps()} />
-      <MainPage serverInfo={servers} isLoggedIn={isLoggedIn} />
+      <MainPage serverInfo={servers} user={user} isLoggedIn={isLoggedIn} />
     </div>
   );
 }

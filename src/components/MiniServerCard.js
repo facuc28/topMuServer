@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
+import ChatIcon from "@material-ui/icons/Chat";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
-import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from "@material-ui/core/Typography";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import ShareIcon from "@material-ui/icons/Share";
@@ -16,6 +17,7 @@ import Grid from "@material-ui/core/Grid";
 import Chip from "@material-ui/core/Chip";
 import InfoIcon from "@material-ui/icons/Info";
 import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,10 +34,31 @@ const useStyles = makeStyles((theme) => ({
   },
   chip: {
     minWidth: "150px"
+  },
+  title: {
+    color: "#f5f6fa"
+  },
+  comment: {
+    color: "#487eb0"
+  },
+  share: {
+    color: "#487eb0"
+  },
+  vote: {
+    color: "#44bd32"
+  },
+  site: {
+    padding: "1px",
+    backgroundColor: "#FFBF27",
+    border: "1px solid #FFBF27",
+    borderRadius: "2px",
+    fontSize: 10,
+    fontWeight: "bold",
   }
 }));
 
 export default function ServerCard(props) {
+  const [loading, setLoading] = useState(false);
   let serverInfo = {
     name: "Server Name",
     experiencia: "--",
@@ -60,7 +83,7 @@ export default function ServerCard(props) {
   const classes = useStyles();
 
   function getCardTitle() {
-    return <Typography variant="h4">{serverInfo.name}</Typography>;
+    return <Typography className={classes.title} variant="h4">{serverInfo.name}</Typography>;
   }
 
   function getLabel(key, value) {
@@ -69,6 +92,24 @@ export default function ServerCard(props) {
 
   function getAvatar() {
     return <InfoIcon color="primary" />;
+  }
+
+  const handleVote = () => {
+    setLoading(true);
+  
+    setTimeout(function () {
+      setLoading(false);
+    }, 1000);
+  };
+
+  function renderVoteIcon() {
+    let value = <AddCircleIcon onClick={handleVote} type="add" className={classes.vote} />;
+
+    if(loading) {
+      value = <CircularProgress size="small"/>
+    }
+
+    return value;
   }
 
   return (
@@ -138,14 +179,20 @@ export default function ServerCard(props) {
         </Grid>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add">
-          <AddCircleIcon style={{ color: "#28a745" }} />
+        <IconButton
+          aria-label="Votar +1"
+          className={classes.vote}
+        >
+          {renderVoteIcon()}
         </IconButton>
-        <IconButton aria-label="remove" color="secondary">
-          <RemoveCircleIcon />
+        <IconButton
+          aria-label="Agregar un comentario"
+          className={classes.comment}
+        >
+          <ChatIcon />
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon color="primary" />
+        <IconButton aria-label="Compartir">
+          <ShareIcon className={classes.share} />
         </IconButton>
       </CardActions>
     </Card>

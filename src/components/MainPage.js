@@ -57,7 +57,7 @@ export default function MainPage(props) {
     let dataToRender;
 
     if (props.isLoggedIn) {
-      dataToRender = <Acordion {...props.isLoggedIn} />;
+      dataToRender = <Acordion user={props.user} />;
     }
 
     return dataToRender;
